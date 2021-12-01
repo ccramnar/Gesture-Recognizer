@@ -1,6 +1,7 @@
 package net.codebot.listview
 
 import android.content.Context
+import android.graphics.Point
 import android.widget.TextView
 import android.view.LayoutInflater
 import android.view.View

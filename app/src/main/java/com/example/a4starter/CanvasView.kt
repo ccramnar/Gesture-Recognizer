@@ -51,4 +51,9 @@ class CanvasView: View {
             canvas.drawCircle(point.x.toFloat(), point.y.toFloat(), 10.0.toFloat(), Paint(Color.CYAN))
         }
     }
+
+    override fun clearAnimation() {
+        super.clearAnimation()
+        points.clear()
+    }
 }

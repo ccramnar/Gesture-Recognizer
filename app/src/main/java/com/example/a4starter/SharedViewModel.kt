@@ -1,6 +1,7 @@
 package com.example.a4starter
 
 import android.graphics.Path
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import net.codebot.listview.Gesture
@@ -22,6 +23,12 @@ class SharedViewModel : ViewModel() {
 
     fun addName(string : String) {
         arrayOfGestureNames.add(Gesture(string))
+    }
+
+    fun printNames() {
+        for (item in arrayOfGestureNames) {
+            item?.name?.let { Log.d("DEBUG", it) }
+        }
     }
 
     // ... more methods added here
