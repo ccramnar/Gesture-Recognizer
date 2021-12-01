@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import com.example.a4starter.R
 
-class Gesture(var name: String, var hometown: String)
+class Gesture(var name: String)
 
 class GesturesAdapter(context: Context?, gestures: ArrayList<Gesture?>?) :
     ArrayAdapter<Gesture?>(context!!, 0, gestures!!) {
@@ -25,11 +25,9 @@ class GesturesAdapter(context: Context?, gestures: ArrayList<Gesture?>?) :
 
         // Lookup view for data population
         val gestureName = view?.findViewById(R.id.gestureName) as TextView
-        val gestureInfo = view?.findViewById(R.id.gestureInfo) as TextView
 
         // Populate the data into the template view using the data object
         gestureName.text = gesture!!.name
-        gestureInfo.text = gesture!!.hometown
 
         // Return the completed view to render on screen
 

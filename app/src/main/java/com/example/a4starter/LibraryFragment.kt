@@ -26,18 +26,18 @@ class LibraryFragment : Fragment() {
         mViewModel!!.desc.observe(viewLifecycleOwner, { s:String -> textView.text = "$s - Library" })
         mViewModel!!.strokeGestures.observe(viewLifecycleOwner, { s:ArrayList<Path> -> textView.text = "stroke count: ${s.size}"})
 
-        val arrayOfGestures = ArrayList<Gesture?>()
+
         print("help")
         print(view?.context);
         print("help")
-        val adapter = GesturesAdapter(getActivity()?.getBaseContext(), arrayOfGestures)
+        val adapter = GesturesAdapter(getActivity()?.getBaseContext(), mViewModel!!.arrayOfGestureNames)
 
         val listView: ListView = root.findViewById<View>(R.id.lvItems) as ListView
         listView.setAdapter(adapter)
 
 
-        adapter.add(Gesture("Nathan", "San Diego"))
-        adapter.add(Gesture("Jeff", "Waterloo"))
+        adapter.add(Gesture("Triangle"))
+        adapter.add(Gesture("Square"))
 
         return root
     }
