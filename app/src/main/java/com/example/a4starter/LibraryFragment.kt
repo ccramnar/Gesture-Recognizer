@@ -5,9 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ListView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import net.codebot.listview.Gesture
+import net.codebot.listview.GesturesAdapter
 
 class LibraryFragment : Fragment() {
     private var mViewModel: SharedViewModel? = null
@@ -22,6 +25,19 @@ class LibraryFragment : Fragment() {
 
         mViewModel!!.desc.observe(viewLifecycleOwner, { s:String -> textView.text = "$s - Library" })
         mViewModel!!.strokeGestures.observe(viewLifecycleOwner, { s:ArrayList<Path> -> textView.text = "stroke count: ${s.size}"})
+
+        val arrayOfGestures = ArrayList<Gesture?>()
+        print("help")
+        print(view?.context);
+        print("help")
+        val adapter = GesturesAdapter(getActivity()?.getBaseContext(), arrayOfGestures)
+
+        val listView: ListView = root.findViewById<View>(R.id.lvItems) as ListView
+        listView.setAdapter(adapter)
+
+
+        adapter.add(Gesture("Nathan", "San Diego"))
+        adapter.add(Gesture("Jeff", "Waterloo"))
 
         return root
     }

@@ -19,10 +19,10 @@ class AdditionFragment : Fragment() {
         mViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
         val root: View = inflater.inflate(R.layout.fragment_addition, container, false)
 
-        val textView = root.findViewById<TextView>(R.id.text_addition)
+       // val textView = root.findViewById<TextView>(R.id.text_addition)
 
-        mViewModel!!.desc.observe(viewLifecycleOwner, { s:String -> textView.text = "$s - Addition" })
-        mViewModel!!.strokeGestures.observe(viewLifecycleOwner, { s:ArrayList<Path> -> textView.text = "stroke count: ${s.size}"})
+      //  mViewModel!!.desc.observe(viewLifecycleOwner, { s:String -> textView.text = "$s - Addition" })
+       // mViewModel!!.strokeGestures.observe(viewLifecycleOwner, { s:ArrayList<Path> -> textView.text = "stroke count: ${s.size}"})
 
         return root
     }
