@@ -18,6 +18,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import net.codebot.drawing.CanvasView
 import net.codebot.listview.Gesture
 
 class MainActivity : AppCompatActivity() {
@@ -92,7 +93,8 @@ class MainActivity : AppCompatActivity() {
     fun ClearGesture(view: View?) {
         Log.d("Debug", "clearing")
         Toast.makeText(getApplicationContext(),"Canvas Cleared",Toast.LENGTH_SHORT).show();
-        view?.clearAnimation()
+        val canView = findViewById<CanvasView>(R.id.canvasView)
+        canView.clear()
     }
 
     fun debugger() {

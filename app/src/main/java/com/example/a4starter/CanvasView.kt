@@ -189,9 +189,12 @@ class CanvasView: View{
 
     }
 
-     fun clear(canvas: CanvasView) {
-        super.clearAnimation()
-        canvas.path = null;
+    fun clear() {
+        Log.d("DEBUG", "IN CANVAS VIEW CLEAR")
+        if (this.path != null) {
+            this.path = null;
+        }
+        invalidate()
     }
 
     init {
