@@ -22,7 +22,6 @@ class CanvasView: View{
     var path: Path? = null
     var paths: ArrayList<Path?> = ArrayList()
     var paintbrush = Paint(Color.BLUE)
-    var background: Bitmap? = null
 
     // we save a lot of points because they need to be processed
     // during touch events e.g. ACTION_MOVE
@@ -47,6 +46,10 @@ class CanvasView: View{
     // the inverse matrix is used to align points with the transformations - see below
     var currentMatrix = Matrix()
     var inverse = Matrix()
+
+    override fun setOnTouchListener(l: OnTouchListener) {
+        super.setOnTouchListener(l)
+    }
 
     // capture touch events (down/move/up) to create a path/stroke that we draw later
     override fun onTouchEvent(event: MotionEvent): Boolean {
@@ -164,24 +167,31 @@ class CanvasView: View{
             else -> {
             }
         }
+        invalidate()
         return true
     }
 
-    // set image as background
-    fun setImage(bitmap: Bitmap?) {
-        background = bitmap
-    }
-
     override fun onDraw(canvas: Canvas) {
+        Log.d("DEBUG", "ON DRAW")
         super.onDraw(canvas)
 
         // apply transformations from the event handler above
         canvas.concat(currentMatrix)
 
+        Log.d("DEBUG", "AFTER CONCAT")
         // draw lines over it
-        for (path in paths) {
+        //for (path in paths) {
+        if (path != null) {
             canvas.drawPath(path!!, paintbrush)
+            Log.d("DEBUG", "drawung oath")
         }
+        Log.d("DEBUG", "AFTER DRAW")
+
+    }
+
+     fun clear(canvas: CanvasView) {
+        super.clearAnimation()
+        canvas.path = null;
     }
 
     init {
