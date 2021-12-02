@@ -11,12 +11,15 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import android.content.DialogInterface
-
-
+import android.graphics.BitmapFactory
+import android.graphics.Color
+import android.widget.LinearLayout
+import net.codebot.drawing.CanvasView
 
 
 class AdditionFragment : Fragment() {
     private var mViewModel: SharedViewModel? = null
+    var pageView: CanvasView? = null
 
     override fun onCreateView(inflater: LayoutInflater,
                               container: ViewGroup?,
