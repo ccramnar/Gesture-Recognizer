@@ -2,11 +2,14 @@ package com.example.a4starter
 
 import android.app.AlertDialog
 import android.content.DialogInterface
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.os.Bundle
 import android.text.InputType
 import android.util.Log
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -39,6 +42,21 @@ class MainActivity : AppCompatActivity() {
         NavigationUI.setupWithNavController(navView, navController)
     }
 
+    fun getBitmapFromView(view: View): Bitmap? {
+        Log.d("DEBUG", view.toString())
+        Log.d("DEBUG", "height: " + view.measuredHeight.toString() + " " + view.measuredHeight.toString())
+        //view.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+        Log.d("DEBUG", "height: " + view.measuredHeight.toString() + " " + view.measuredHeight.toString())
+        val bitmap = Bitmap.createBitmap(
+            1080, 1200,
+            Bitmap.Config.ARGB_8888
+        )
+        val canvas = Canvas(bitmap)
+        view.layout(0, 0, view.measuredWidth, view.measuredHeight)
+        view.draw(canvas)
+        return bitmap
+    }
+
     fun AddGesture(view: View?) {
         val canView = findViewById<View>(R.id.canvasView)
         val builder1: AlertDialog.Builder = AlertDialog.Builder(this)
@@ -52,22 +70,29 @@ class MainActivity : AppCompatActivity() {
         builder1.setPositiveButton(
             "Yes",
             DialogInterface.OnClickListener { dialog, id ->
+                val canviewBitmap = getBitmapFromView(canView)
                 var name: String = input.text.toString()
                 Log.d("DEBUG",name)
-                model.addName(name)
-
+                if (canviewBitmap != null) {
+                    model.addGesture(name, canviewBitmap)
+                }
+                Toast.makeText(getApplicationContext(),"Gesture Added",Toast.LENGTH_SHORT).show();
                 dialog.cancel() })
 
         builder1.setNegativeButton(
             "No",
-            DialogInterface.OnClickListener { dialog, id -> dialog.cancel() })
+            DialogInterface.OnClickListener { dialog, id ->
+                Toast.makeText(getApplicationContext(),"Gesture was not added. Action Cancelled",Toast.LENGTH_SHORT).show();
+                dialog.cancel() })
 
         val alert11: AlertDialog = builder1.create()
         alert11.show()
     }
 
     fun ClearGesture(view: View?) {
-        debugger()
+        Log.d("Debug", "clearing")
+        Toast.makeText(getApplicationContext(),"Canvas Cleared",Toast.LENGTH_SHORT).show();
+        view?.clearAnimation()
     }
 
     fun debugger() {

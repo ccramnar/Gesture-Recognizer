@@ -21,23 +21,16 @@ class LibraryFragment : Fragment() {
 
         mViewModel = ViewModelProvider(requireActivity()).get(SharedViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_library, container, false)
-        val textView = root.findViewById<TextView>(R.id.text_library)
+      //  val textView = root.findViewById<TextView>(R.id.text_library)
 
-        mViewModel!!.desc.observe(viewLifecycleOwner, { s:String -> textView.text = "$s - Library" })
-        mViewModel!!.strokeGestures.observe(viewLifecycleOwner, { s:ArrayList<Path> -> textView.text = "stroke count: ${s.size}"})
+        //mViewModel!!.desc.observe(viewLifecycleOwner, { s:String -> textView.text = "$s - Library" })
+        //mViewModel!!.strokeGestures.observe(viewLifecycleOwner, { s:ArrayList<Path> -> textView.text = "stroke count: ${s.size}"})
 
-
-        print("help")
         print(view?.context);
-        print("help")
-        val adapter = GesturesAdapter(getActivity()?.getBaseContext(), mViewModel!!.arrayOfGestureNames)
+        val adapter = GesturesAdapter(getActivity()?.getBaseContext(), mViewModel!!.arrayOfGesture)
 
         val listView: ListView = root.findViewById<View>(R.id.lvItems) as ListView
         listView.setAdapter(adapter)
-
-
-        adapter.add(Gesture("Triangle"))
-        adapter.add(Gesture("Square"))
 
         return root
     }

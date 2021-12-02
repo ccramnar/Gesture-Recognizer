@@ -5,15 +5,19 @@
     android:layout_height="match_parent" >
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/gestureImage"
         android:layout_width="match_parent"
-        android:layout_height="32dp"
-        android:layout_weight="1"
-        app:srcCompat="?attr/selectableItemBackground" />
+        android:layout_height="89dp"
+        android:layout_weight="0.5"
+        app:srcCompat="?attr/selectableItemBackground"
+        android:background="@android:color/darker_gray"
+        android:adjustViewBounds="true"/>
 
     <TextView
         android:id="@+id/gestureName"
-        android:layout_width="85dp"
-        android:layout_height="32dp"
-        android:text="Name" />
+        android:layout_width="300dp"
+        android:layout_height="89dp"
+        android:text="Name"
+        android:gravity="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 </LinearLayout>

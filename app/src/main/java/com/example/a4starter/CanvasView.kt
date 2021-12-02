@@ -1,14 +1,14 @@
 package net.codebot.drawing;
 
 import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.graphics.Point
+import android.graphics.*
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
 import android.view.View
+import android.graphics.Bitmap
+import android.view.View.MeasureSpec
+
 
 class CanvasView: View {
     constructor(context: Context?) : super(context) {}
@@ -39,6 +39,7 @@ class CanvasView: View {
             MotionEvent.ACTION_UP -> {
                 Log.d("DEBUG", "UP " + event.x + "," + event.y)
                 invalidate()
+                //points.clear()
             }
         }
         return true
@@ -52,8 +53,15 @@ class CanvasView: View {
         }
     }
 
+    fun printPoints() {
+        for (point in points) {
+            Log.d("DEBUG", point.toString())
+        }
+    }
+
     override fun clearAnimation() {
-        super.clearAnimation()
+        Log.d("Debug", "clearing poiints")
+        printPoints()
         points.clear()
     }
 }

@@ -1,5 +1,6 @@
 package com.example.a4starter
 
+import android.graphics.Bitmap
 import android.graphics.Path
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -10,7 +11,7 @@ import java.util.*
 class SharedViewModel : ViewModel() {
     val desc: MutableLiveData<String> = MutableLiveData()
     val strokeGestures: MutableLiveData<ArrayList<Path>> = MutableLiveData<ArrayList<Path>>()
-    val arrayOfGestureNames = ArrayList<Gesture?>()
+    val arrayOfGesture = ArrayList<Gesture?>()
 
     init {
         desc.value = "Shared model"
@@ -21,12 +22,12 @@ class SharedViewModel : ViewModel() {
         strokeGestures.value?.add(path)
     }
 
-    fun addName(string : String) {
-        arrayOfGestureNames.add(Gesture(string))
+    fun addGesture(string : String, image: Bitmap) {
+        arrayOfGesture.add(Gesture(string, image))
     }
 
     fun printNames() {
-        for (item in arrayOfGestureNames) {
+        for (item in arrayOfGesture) {
             item?.name?.let { Log.d("DEBUG", it) }
         }
     }
