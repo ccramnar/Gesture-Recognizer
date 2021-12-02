@@ -79,6 +79,7 @@ class MainActivity : AppCompatActivity() {
                 var name: String = input.text.toString()
                 Log.d("DEBUG",name)
                 if (canviewBitmap != null) {
+                    model.addStroke(canView.path!!)
                     model.addGesture(name, canviewBitmap)
                 }
                 Toast.makeText(getApplicationContext(),"Gesture Added",Toast.LENGTH_SHORT).show();
@@ -104,4 +105,5 @@ class MainActivity : AppCompatActivity() {
     fun debugger() {
         model.printNames()
     }
+
 }

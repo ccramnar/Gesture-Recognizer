@@ -22,18 +22,26 @@ class SharedViewModel : ViewModel() {
         strokeGestures.value?.add(path)
     }
 
-    fun addGesture(string : String, image: Bitmap) {
+    fun addGesture(name : String, image: Bitmap) {
         for (item in arrayOfGesture) {
-            if (item?.name == string) {
+            if (item?.name == name) {
                 arrayOfGesture.remove(item)
             }
         }
-        arrayOfGesture.add(Gesture(string, image))
+        arrayOfGesture.add(Gesture(name, image))
     }
 
     fun printNames() {
         for (item in arrayOfGesture) {
             item?.name?.let { Log.d("DEBUG", it) }
+        }
+    }
+
+    fun deleteGesture(name: String) {
+        for (item in arrayOfGesture) {
+            if (item?.name == name) {
+                arrayOfGesture.remove(item)
+            }
         }
     }
 
