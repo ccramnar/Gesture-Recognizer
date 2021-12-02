@@ -2,6 +2,7 @@ package com.example.a4starter
 
 import android.graphics.Path
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,6 +32,11 @@ class LibraryFragment : Fragment() {
 
         val listView: ListView = root.findViewById<View>(R.id.lvItems) as ListView
         listView.setAdapter(adapter)
+
+        listView.setOnItemClickListener { parent, _, position, _ ->
+            val selectedItem = parent.getItemAtPosition(position) as String
+            Log.d("DEBUG", selectedItem)
+        }
 
         return root
     }

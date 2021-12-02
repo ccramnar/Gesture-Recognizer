@@ -59,7 +59,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun AddGesture(view: View?) {
-        val canView = findViewById<View>(R.id.canvasView)
+        val canView = findViewById<CanvasView>(R.id.canvasView)
         val builder1: AlertDialog.Builder = AlertDialog.Builder(this)
         builder1.setMessage("Enter the name of this gesture")
         builder1.setCancelable(true)
@@ -71,6 +71,10 @@ class MainActivity : AppCompatActivity() {
         builder1.setPositiveButton(
             "Yes",
             DialogInterface.OnClickListener { dialog, id ->
+                if (canView.path == null ) {
+                    Toast.makeText(getApplicationContext(),"There is not gesture to Add",Toast.LENGTH_SHORT).show();
+                    dialog.cancel()
+                } else {
                 val canviewBitmap = getBitmapFromView(canView)
                 var name: String = input.text.toString()
                 Log.d("DEBUG",name)
@@ -78,7 +82,7 @@ class MainActivity : AppCompatActivity() {
                     model.addGesture(name, canviewBitmap)
                 }
                 Toast.makeText(getApplicationContext(),"Gesture Added",Toast.LENGTH_SHORT).show();
-                dialog.cancel() })
+                dialog.cancel() }})
 
         builder1.setNegativeButton(
             "No",
