@@ -25,7 +25,9 @@ class SharedViewModel : ViewModel() {
     fun addGesture(name : String, image: Bitmap) {
         for (item in arrayOfGesture) {
             if (item?.name == name) {
+                val index  = arrayOfGesture.indexOf(item)
                 arrayOfGesture.remove(item)
+                strokeGestures.value?.removeAt(index)
             }
         }
         arrayOfGesture.add(Gesture(name, image))
