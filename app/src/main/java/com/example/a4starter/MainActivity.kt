@@ -106,7 +106,10 @@ class MainActivity : AppCompatActivity() {
         Log.d("Debug", "recognizing")
         Toast.makeText(getApplicationContext(),"Getsure Recognized",Toast.LENGTH_SHORT).show();
         val canView = findViewById<CanvasView>(R.id.canvasView)
-        canView.clear()
+        val path  = canView.path
+        if (path != null ) {
+            model.recognizeGesture(path)
+        }
     }
 
     fun debugger() {

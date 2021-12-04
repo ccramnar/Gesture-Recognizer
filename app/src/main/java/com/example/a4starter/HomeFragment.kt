@@ -32,4 +32,8 @@ class HomeFragment : Fragment() {
 
         return root
     }
+
+    fun showTopThree(first:Int, second:Int, third:Int) {
+
+    }
 }
