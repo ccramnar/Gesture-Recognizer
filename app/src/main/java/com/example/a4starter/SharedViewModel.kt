@@ -45,6 +45,7 @@ class SharedViewModel : ViewModel() {
                 arrayOfGesture.remove(item)
                 strokeGestures.removeAt(index)
                 strokePoints.removeAt(index)
+                break
             }
         }
         arrayOfGesture.add(Gesture(name, image))
@@ -59,7 +60,11 @@ class SharedViewModel : ViewModel() {
     fun deleteGesture(name: String) {
         for (item in arrayOfGesture) {
             if (item?.name == name) {
+                val index  = arrayOfGesture.indexOf(item)
                 arrayOfGesture.remove(item)
+               strokeGestures.removeAt(index)
+               strokePoints.removeAt(index)
+                break
             }
         }
     }

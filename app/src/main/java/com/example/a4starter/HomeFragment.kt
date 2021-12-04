@@ -40,7 +40,9 @@ class HomeFragment : Fragment() {
         val recogbutton: Button = root.findViewById<Button>(R.id.button3) as Button
         recogbutton.setOnClickListener {
             RecognizeGesture(root)
-            adapter!!.notifyDataSetChanged() }
+            adapter!!.notifyDataSetChanged()
+        }
+
 
         return root
     }
