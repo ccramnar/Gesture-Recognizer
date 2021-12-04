@@ -79,8 +79,8 @@ class MainActivity : AppCompatActivity() {
                 var name: String = input.text.toString()
                 Log.d("DEBUG",name)
                 if (canviewBitmap != null) {
-                    model.addStroke(canView.path!!)
                     model.addGesture(name, canviewBitmap)
+                    model.addStroke(canView.path!!)
                 }
                 Toast.makeText(getApplicationContext(),"Gesture Added",Toast.LENGTH_SHORT).show();
                 dialog.cancel() }})
@@ -101,6 +101,7 @@ class MainActivity : AppCompatActivity() {
         val canView = findViewById<CanvasView>(R.id.canvasView)
         canView.clear()
     }
+
 
     fun debugger() {
         model.printNames()
