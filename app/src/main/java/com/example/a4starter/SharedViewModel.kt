@@ -23,6 +23,7 @@ class SharedViewModel : ViewModel() {
     val strokeGestures: ArrayList<Path> = ArrayList<Path>()
     val strokePoints: ArrayList<Array<Point?>> = ArrayList<Array<Point?>>()
     val arrayOfGesture = ArrayList<Gesture?>()
+    val arrayOfTopThree = ArrayList<Gesture?>()
 
     init {
         desc.value = "Shared model"
@@ -194,7 +195,7 @@ class SharedViewModel : ViewModel() {
         //get the index of the top 3 i guess
     }
 
-    fun recognizeGesture(path: Path): Int {
+    fun recognizeGesture(path: Path){
         Log.d("Banger", "BANGER")
         //get an array of an array of points
         // for each array, calculkate the thing then compare with the value with the path given
@@ -206,11 +207,11 @@ class SharedViewModel : ViewModel() {
         for (item in strokePoints) {
             d?.add(doMath(givenPathPoints, item))
         }
-        var first = 0;
+        var first = -1;
         var firstval = 10000;
-        var second = 0;
+        var second = -1;
         var secondval = 10000;
-        var third = 0;
+        var third = -1;
         var thirdval = 10000;
         for (index in 0 until d.size) {
             if (d[index] < firstval) {
@@ -218,9 +219,41 @@ class SharedViewModel : ViewModel() {
                 first = index;
             }
         }
+        for (index in 0 until d.size) {
+            if ((d[index] > firstval) and (d[index] < secondval)){
+                secondval = d[index]
+                second = index;
+            }
+        }
+        for (index in 0 until d.size) {
+            if ((d[index] > secondval) and (d[index] < thirdval)){
+                thirdval = d[index]
+                third = index;
+            }
+        }
         Log.d("Banger", first.toString())
-        return first
 
+        showTopThree(first, second, third)
+
+    }
+
+    fun showTopThree(first:Int, second:Int, third:Int) {
+        arrayOfTopThree.clear()
+        if (first == -1) {
+
+        } else {
+            arrayOfTopThree.add(arrayOfGesture[first])
+        }
+        if (second == -1) {
+
+        } else {
+            arrayOfTopThree.add(arrayOfGesture[second])
+        }
+        if (third == -1) {
+
+        } else {
+            arrayOfTopThree.add(arrayOfGesture[third])
+        }
     }
 
     // ... more methods added here
