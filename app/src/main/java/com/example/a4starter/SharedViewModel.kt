@@ -70,25 +70,39 @@ class SharedViewModel : ViewModel() {
     }
 
     fun convertPathToPoints(path: Path) : Array<Point?> {
-        //source:https://stackoverflow.com/questions/7972780/how-do-i-find-all-the-points-in-a-path-in-android
-        val pointArray: Array<Point?> = arrayOfNulls<Point>(120)
+        /* source: piazza post: 783
+        "Calculate the step size that you want to use i.e. step_size = path_length / number_of_points
+        For every point in the path
+        - determine the direction to the next point
+        - move step_size in the direction
+        - store your new location
+        Repeat for all points, and you will have a regularly formed path containing number_of_points points."
+        (Jeff Avery, 2021)
+        https://developer.android.com/reference/android/graphics/PathMeasure
+        https://developer.android.com/reference/android/graphics/Path
+         */
+        val N = 128
+        val pointArray: Array<Point?> = arrayOfNulls<Point>(N)
         var counter = 0
-        val pm = PathMeasure(path, false)
-        val length = pm.length
-        var dist = 0f
-        val speed = length / 120
+        val pathmMeasureAttrib = PathMeasure(path, false)
+        Log.d("MEASUREMENTS", pathmMeasureAttrib.toString())
+        val length = pathmMeasureAttrib.length
+        Log.d("MEASUREMENTS", length.toString())
+        var currentdist = 0f
+        val speed = length / N
+        Log.d("MEASUREMENTS", speed.toString())
         val pointCoords = FloatArray(2)
         Log.d("MEASUREMENTS", length.toString())
 
-        while ((dist < length) and (counter < 120)) {
+        while ((currentdist < length) and (counter < N)) {
             // get point from the path
-            pm.getPosTan(dist, pointCoords, null)
+            pathmMeasureAttrib.getPosTan(currentdist, pointCoords, null)
             pointArray[counter] = Point(
                 pointCoords[0].toInt(),
                 pointCoords[1].toInt()
             )
             counter++
-            dist += speed
+            currentdist += speed
         }
 
         return pointArray
@@ -114,6 +128,7 @@ class SharedViewModel : ViewModel() {
 
     fun rotate(centroid: Point,pointArray: Array<Point?>): Array<Point?> {
         //source: https://stackoverflow.com/questions/22491178/how-to-rotate-a-point-around-another-point
+        // permission given by instructor in piazza post
         val angle = 0.0;
         for (point in pointArray) {
             if (point != null) {
@@ -130,6 +145,7 @@ class SharedViewModel : ViewModel() {
 
     fun scale(centroid: Point, pointArray: Array<Point?>): Array<Point?> {
         //source: https://stackoverflow.com/questions/27496920/how-can-i-scale-points-to-fit-a-fixed-size-graph
+        // permission given by instructor in piazza post, code not copy and pasted
         val translate_x = centroid.x
         val translate_y = centroid.y
         var minYneg = 0;

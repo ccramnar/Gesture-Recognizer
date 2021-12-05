@@ -10,7 +10,7 @@ import android.graphics.Bitmap
 import android.view.View.MeasureSpec
 import android.widget.ImageView
 
-
+//source: taken from Android public repo, 0.2 Canvas and 0.9 Pan and zoom
 class CanvasView: View{
     constructor(context: Context?) : super(context) {}
     constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {}
