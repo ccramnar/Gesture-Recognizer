@@ -52,13 +52,13 @@ class LibraryFragment : Fragment() {
     }
 
     fun deletelistviewItemDialog(itemName : String) {
-        val builder1: AlertDialog.Builder = AlertDialog.Builder(getActivity())
-        builder1.setMessage("Do you want to delete this gesture")
-        builder1.setCancelable(true)
+        val deleteToast: AlertDialog.Builder = AlertDialog.Builder(getActivity())
+        deleteToast.setMessage("Do you want to delete this gesture")
+        deleteToast.setCancelable(true)
         Log.d("DEBUG", "here")
 
 
-        builder1.setPositiveButton(
+        deleteToast.setPositiveButton(
             "Yes",
             DialogInterface.OnClickListener { dialog, id ->
                     mViewModel?.deleteGesture(itemName)
@@ -66,14 +66,14 @@ class LibraryFragment : Fragment() {
                     adapter!!.notifyDataSetChanged()
                     dialog.cancel() })
 
-        builder1.setNegativeButton(
+        deleteToast.setNegativeButton(
             "No",
             DialogInterface.OnClickListener { dialog, id ->
                 Toast.makeText(getActivity()?.getBaseContext(),"Gesture was not deleted. Action Cancelled",
                     Toast.LENGTH_SHORT).show();
                 dialog.cancel() })
 
-        val alert11: AlertDialog = builder1.create()
+        val alert11: AlertDialog = deleteToast.create()
         Log.d("DEBUG", "BEFORE SHOE")
         alert11.show()
     }

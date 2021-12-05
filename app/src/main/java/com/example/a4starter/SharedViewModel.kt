@@ -70,30 +70,32 @@ class SharedViewModel : ViewModel() {
     }
 
     fun convertPathToPoints(path: Path) : Array<Point?> {
+        //source:https://stackoverflow.com/questions/7972780/how-do-i-find-all-the-points-in-a-path-in-android
         val pointArray: Array<Point?> = arrayOfNulls<Point>(120)
+        var counter = 0
         val pm = PathMeasure(path, false)
         val length = pm.length
-        var distance = 0f
-        val speed = length / 20
-        var counter = 0
-        val aCoordinates = FloatArray(2)
+        var dist = 0f
+        val speed = length / 120
+        val pointCoords = FloatArray(2)
         Log.d("MEASUREMENTS", length.toString())
 
-        while (distance < length && counter < 120) {
+        while ((dist < length) and (counter < 120)) {
             // get point from the path
-            pm.getPosTan(distance, aCoordinates, null)
+            pm.getPosTan(dist, pointCoords, null)
             pointArray[counter] = Point(
-                aCoordinates[0].toInt(),
-                aCoordinates[1].toInt()
+                pointCoords[0].toInt(),
+                pointCoords[1].toInt()
             )
             counter++
-            distance = distance + speed
+            dist += speed
         }
 
         return pointArray
     }
 
     fun calculateCentroid(points: Array<Point?>):Point {
+        //source: piazza post @725
         var centroid_x = 0
         var centroid_y = 0
         var sum_x = 0;
@@ -111,23 +113,23 @@ class SharedViewModel : ViewModel() {
     }
 
     fun rotate(centroid: Point,pointArray: Array<Point?>): Array<Point?> {
+        //source: https://stackoverflow.com/questions/22491178/how-to-rotate-a-point-around-another-point
         val angle = 0.0;
         for (point in pointArray) {
             if (point != null) {
-                val x1 = point.x - centroid.x;
-                val y1 = point.y - centroid.y;
-
-                val x2 = x1 * Math.cos(angle) - y1 * Math.sin(angle)
-                val y2 = x1 * Math.sin(angle) + y1 * Math.cos(angle)
-
-                point.x = (x2 + centroid.x).toInt();
-                point.y = (y2 + centroid.y).toInt();
+                val x_1 = point.x - centroid.x;
+                val y_1 = point.y - centroid.y;
+                val x_2 = x_1 * Math.cos(angle) - y_1 * Math.sin(angle)
+                val y_2 = x_1 * Math.sin(angle) + y_1 * Math.cos(angle)
+                point.x = (x_2 + centroid.x).toInt();
+                point.y = (y_2 + centroid.y).toInt();
             }
         }
         return pointArray
     }
 
     fun scale(centroid: Point, pointArray: Array<Point?>): Array<Point?> {
+        //source: https://stackoverflow.com/questions/27496920/how-can-i-scale-points-to-fit-a-fixed-size-graph
         val translate_x = centroid.x
         val translate_y = centroid.y
         var minYneg = 0;
@@ -154,8 +156,6 @@ class SharedViewModel : ViewModel() {
         val absX = maxOf(maxXpos.absoluteValue, minXneg.absoluteValue)
         val absY = maxOf(maxYpos.absoluteValue, minYneg.absoluteValue)
         val size = 100;
-        val scalingCoeffX = size / absX
-        val scalingCoeffY = size / absY
         for (point in pointArray) {
             if (point == null) continue
             point.x = point.x - translate_x
@@ -180,6 +180,7 @@ class SharedViewModel : ViewModel() {
     }
 
     fun doMath(given:Array<Point?>, library:Array<Point?>):Int {
+        //source: lecture note website with the formula idk where it is
         var n = 0;
         var sum = 0.0;
         for (index in 0 until given.size) {
