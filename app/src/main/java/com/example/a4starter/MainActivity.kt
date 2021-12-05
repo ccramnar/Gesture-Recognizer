@@ -60,15 +60,15 @@ class MainActivity : AppCompatActivity() {
 
     fun AddGesture(view: View?) {
         val canView = findViewById<CanvasView>(R.id.canvasView)
-        val builder1: AlertDialog.Builder = AlertDialog.Builder(this)
-        builder1.setMessage("Enter the name of this gesture")
-        builder1.setCancelable(true)
+        val addtoast: AlertDialog.Builder = AlertDialog.Builder(this)
+        addtoast.setMessage("Enter the name of this gesture")
+        addtoast.setCancelable(true)
         val input = EditText(this)
         input.setHint("Enter Text")
         input.inputType = InputType.TYPE_CLASS_TEXT
-        builder1.setView(input)
+        addtoast.setView(input)
 
-        builder1.setPositiveButton(
+        addtoast.setPositiveButton(
             "Yes",
             DialogInterface.OnClickListener { dialog, id ->
                 if (canView.path == null ) {
@@ -85,13 +85,13 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(getApplicationContext(),"Gesture Added",Toast.LENGTH_SHORT).show();
                 dialog.cancel() }})
 
-        builder1.setNegativeButton(
+        addtoast.setNegativeButton(
             "No",
             DialogInterface.OnClickListener { dialog, id ->
                 Toast.makeText(getApplicationContext(),"Gesture was not added. Action Cancelled",Toast.LENGTH_SHORT).show();
                 dialog.cancel() })
 
-        val alert11: AlertDialog = builder1.create()
+        val alert11: AlertDialog = addtoast.create()
         alert11.show()
     }
 
